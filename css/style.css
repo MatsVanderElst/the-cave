@@ -19,3 +19,8 @@ body {
   font-size: var(--default-font-size);
   margin: 2rem;
 }
+
+.dragon1{
+  position: fixed;
+  right: -400px;
+}

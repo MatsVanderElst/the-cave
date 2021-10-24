@@ -80,8 +80,8 @@ class GameScene {
         this.choices.push(new Choice(description, nextScene, choiceSound));
     }
 
-    addAnimation(image, ease) {
-        this.animations.push(new Animation(image, ease));
+    addAnimation(image, ease, duration, x) {
+        this.animations.push(new Animation(image, ease, duration, x));
     }
 
     playSoundscape() {
@@ -114,10 +114,12 @@ class Choice {
 
 
 class Animation {
-    constructor(name, ease) {
+    constructor(name, ease, duration, x) {
         this.cssClass = name;
         this.image = `assets/img/${name}.png`;
         this.ease = ease;
+        this.duration = duration;
+        this.x = x;
     }
 }
 
@@ -131,11 +133,19 @@ const updateHTML = (scene) => {
     $sceneButtons = document.querySelector(".button__container");
     $sceneButtons.innerHTML = buttons;
 
-    //render the animation for the scene
-    const animations = scene.animations.map(animation => { return `<img class="${animation.cssClass}" alt="${animation.cssClass}" src="${animation.image}">`}).join("");
-    $container = document.querySelector(".animation__container");
-    $container.innerHTML = animations;
+    // render the images for the scene if neccecary
+    if (scene.animations.length > 0) {
+        const animations = scene.animations.map(animation => { return `<img class="${animation.cssClass}" alt="${animation.cssClass}" src="${animation.image}">` }).join("");
+        $container = document.querySelector(".animation__container");
+        $container.innerHTML = animations;
+    }
 
+    //animate the images
+    for (let i = 0; i < scene.animations.length; i++) {
+        const animation = scene.animations[i];
+        gsap.to(`.${animation.cssClass}`, { duration: animation.duration, x: animation.x, ease: animation.ease});
+    }
+    /* gsap.to(".dragon1", { duration: 3, x: -500, ease: "expo" }); */
 }
 
 const testClasses = () => {
@@ -145,8 +155,8 @@ const testClasses = () => {
     //add choices
     scene.addChoice("fight", "fightScene", "swordSwing");
     scene.addChoice("run", "runningScene", "runningAway");
-    scene.addAnimation("dragon1", "bounce");
-    scene.addAnimation("knight1", "bounce"); 
+    scene.addAnimation("knight1", "expo", 3, 300); 
+    scene.addAnimation("dragon1", "expo", 3, -300);
     game.addScene(scene);
     
     
