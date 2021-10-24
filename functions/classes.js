@@ -4,28 +4,36 @@ class Game {
     scenes = [];
     currentSceneIndex = 0;
     currentScene;
-    sceneListener;
+    sceneListener; // Javascript function that gets called when DOM needs to be changed
+    constructor(sceneListener) {
+        this.sceneListener = sceneListener;
+    }
 
-    constructor() {}
-
-    addScene(scene) {
-        this.scenes.push(scene);
+    // returns true if scene was succesfully added to the game
+    addScene(sceneToAdd) {
+        for (let i = 0; i < this.scenes.length; i++) {
+            const existingScene = this.scenes[i];
+            if (existingScene.id === sceneToAdd.id) {
+                console.log(`WARNING!!! scene with id ${sceneToAdd.id} already exists!!!! The id must be unique`);
+                return false;
+            }
+        }
+        this.scenes.push(sceneToAdd);
+        return true;
     }
 
     makeChoice(description) {
         for (let i = 0; i < this.currentScene.choices.length; i++) {  
             const choice = this.currentScene.choices[i];
             if (choice.description === description) {
-                // play choice sound              ===============>> huidige sound
+                // play choice sound             
                 choice.playChoiceSound();
 
-                //moveuser to the next scene     ============ =>>> volgende vieuw door :nextScene  ====> Dus verkeerde audio?
+                //moveuser to the next scene     
                 this.moveTo(choice.nextScene);
 
-                //update what user sees via listener
-                this.sceneListener(this.currentScene);
 
-                // TODO: play the choice sound   ============== =>>> huidige sound
+                // TODO: play the choice sound   
                 this.currentScene.playSoundscape();
             }
         }
@@ -37,11 +45,15 @@ class Game {
             if (scene.id === sceneId) {
                 this.currentSceneIndex = i;
                 this.currentScene = scene;
-                this.sceneListener(this.currentScene);
-                return;
+                //update what user sees via listener
+                if (this.sceneListener) {
+                    this.sceneListener(this.currentScene);
+                }
+                return true;
             }
         }
-        console.log(`didn't find scene for scene id "${sceneId}", check scenario!`)
+        console.log(`didn't find scene for scene id "${sceneId}", check scenario!`);
+        return false;
 
     }
     // method to register a function to call when a scene changes
@@ -110,28 +122,55 @@ class Animation {
     }
 }
 
+const updateHTML = (scene) => {
+    //description
+    $sceneDescription = document.querySelector(".sceneDescription");
+    $sceneDescription.innerHTML = scene.storyLine;
+
+    //render the buttons for choices in the scene
+    const buttons = scene.choices.map(choice => { return `<button class="btn" onclick="game.makeChoice('${choice.description}');">${choice.description}</button>` }).join("");
+    $sceneButtons = document.querySelector(".button__container");
+    $sceneButtons.innerHTML = buttons;
+
+}
+
 const testClasses = () => {
-    game = new Game();
-    startScene = new GameScene("start", "you wake up in a cave", "dragon");
+    game = new Game(updateHTML);
+    scene = new GameScene("start", "you wake up in a cave", "dragon");
+    
     //add choices
-    startScene.addChoice("fight", "fightScene", "swordSwing");
-    startScene.addChoice("run", "runningScene", "runningAway");
-    game.addScene(startScene);
+    scene.addChoice("fight", "fightScene", "swordSwing");
+    scene.addChoice("run", "runningScene", "runningAway");
+    game.addScene(scene);
+    
+    
+    scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!");
+    scene.addChoice("Sword", "swordScene", "swordSwing");
+    scene.addChoice("Axe", "axeScene", "swordSwing");
+    game.addScene(scene);
+    
+    
+    scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!");
+    scene.addChoice("stab", "stabScene", "dragon");
+    scene.addChoice("throw", "deathScene", "cursing");
+    scene.addChoice("swing", "deathScene", "cursing");
+    game.addScene(scene);
+    
+    //should return false because scene id's must be uniqe
+    if (game.addScene(new GameScene("start","this Scene should be rejected by the game"))) {
+        return; // Gosh darnit, we have a failed test
+    }
 
-    fightScene = new GameScene("fightScene", "You're fighting");
-    game.addScene(fightScene);
+    //should return false, there is no scene with id "bruh"
+    if (game.moveTo("bruh") === true) {
+        return;// Gosh darnit, we have a failed test
+    }
+    
 
-    //should give warning, there is no scene with id "bruh"
-    game.moveTo("bruh");
-
-    //start the game
-    game.moveTo("start");
-
-
-    //test makeChoice function
-
-    game.makeChoice("fight");
-
+    //start the game, schould return true
+    if (game.moveTo("start") === false) {
+        return;// Gosh darnit, we have a failed test
+    }
 
 }
 
