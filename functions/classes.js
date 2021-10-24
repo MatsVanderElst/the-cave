@@ -1,3 +1,5 @@
+//Site used for sounds: https://quicksounds.com/search/filter/tracks/sword
+
 class Game {
     scenes = [];
     currentSceneIndex = 0;
@@ -11,16 +13,20 @@ class Game {
     }
 
     makeChoice(description) {
-        for (let i = 0; i < this.currentScene.choices.length; i++) {
+        for (let i = 0; i < this.currentScene.choices.length; i++) {  
             const choice = this.currentScene.choices[i];
             if (choice.description === description) {
-                // TODO: play the choice sound
-                this.currentScene.playSoundscape();
+                // play choice sound              ===============>> huidige sound
+                choice.playChoiceSound();
 
+                //moveuser to the next scene     ============ =>>> volgende vieuw door :nextScene  ====> Dus verkeerde audio?
                 this.moveTo(choice.nextScene);
-                //TODO: update scene in html
 
+                //update what user sees via listener
+                this.sceneListener(this.currentScene);
 
+                // TODO: play the choice sound   ============== =>>> huidige sound
+                this.currentScene.playSoundscape();
             }
         }
     }
@@ -58,8 +64,8 @@ class GameScene {
         this.soundscape = soundscape;
     }
 
-    addChoice(description, nextScene) {
-        this.choices.push(new Choice(description, nextScene));
+    addChoice(description, nextScene, choiceSound) {
+        this.choices.push(new Choice(description, nextScene, choiceSound));
     }
 
     addAnimation(image, ease) {
@@ -69,7 +75,7 @@ class GameScene {
     playSoundscape() {
         if (this.soundscape) {
             const audio = new Audio(`../assets/audio/${this.soundscape}.mp3`);
-            audio.loop = true;
+            audio.loop = false; //==> TODO: check om zachter te spelen
             audio.play();
         }
     }
@@ -84,7 +90,7 @@ class Choice {
     constructor(description, nextScene, choiceSound) {
         this.description = description;
         this.nextScene = nextScene;
-        this.choiceSound = choiseSound;
+        this.choiceSound = choiceSound;
     }
     playChoiceSound() {
         if (this.choiceSound) {
@@ -109,7 +115,7 @@ const testClasses = () => {
     startScene = new GameScene("start", "you wake up in a cave", "dragon");
     //add choices
     startScene.addChoice("fight", "fightScene", "swordSwing");
-    startScene.addChoice("run", "runningScene", "swordSwing");
+    startScene.addChoice("run", "runningScene", "runningAway");
     game.addScene(startScene);
 
     fightScene = new GameScene("fightScene", "You're fighting");
@@ -123,7 +129,9 @@ const testClasses = () => {
 
 
     //test makeChoice function
-    game.makeChoice("fight")
+
+    game.makeChoice("fight");
+
 
 }
 
