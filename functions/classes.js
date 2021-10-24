@@ -113,11 +113,10 @@ class Choice {
 }
 
 
-
-
 class Animation {
-    constructor(image, ease) {
-        this.image = image;
+    constructor(name, ease) {
+        this.cssClass = name;
+        this.image = `assets/img/${name}.png`;
         this.ease = ease;
     }
 }
@@ -132,6 +131,11 @@ const updateHTML = (scene) => {
     $sceneButtons = document.querySelector(".button__container");
     $sceneButtons.innerHTML = buttons;
 
+    //render the animation for the scene
+    const animations = scene.animations.map(animation => { return `<img class="${animation.cssClass}" alt="${animation.cssClass}" src="${animation.image}">`}).join("");
+    $container = document.querySelector(".animation__container");
+    $container.innerHTML = animations;
+
 }
 
 const testClasses = () => {
@@ -141,6 +145,8 @@ const testClasses = () => {
     //add choices
     scene.addChoice("fight", "fightScene", "swordSwing");
     scene.addChoice("run", "runningScene", "runningAway");
+    scene.addAnimation("dragon1", "bounce");
+    scene.addAnimation("knight1", "bounce"); 
     game.addScene(scene);
     
     
