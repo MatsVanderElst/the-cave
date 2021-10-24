@@ -1,0 +1,21 @@
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+}
+
+:root{
+  --default-font-size: 1.4rem;
+}
+
+html {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: var(--default-font-size);
+  margin: 2rem;
+}

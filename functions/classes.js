@@ -79,12 +79,23 @@ class GameScene {
 class Choice {
     description = 'you choose to ...'
     nextScene;
+    choiseSound;
 
-    constructor(description, nextScene) {
+    constructor(description, nextScene, choiceSound) {
         this.description = description;
         this.nextScene = nextScene;
+        this.choiceSound = choiseSound;
+    }
+    playChoiceSound() {
+        if (this.choiceSound) {
+            const audio = new Audio(`../assets/audio/${this.choiceSound}.mp3`);
+            audio.play();
+        }
     }
 }
+
+
+
 
 class Animation {
     constructor(image, ease) {
@@ -97,8 +108,8 @@ const testClasses = () => {
     game = new Game();
     startScene = new GameScene("start", "you wake up in a cave", "dragon");
     //add choices
-    startScene.addChoice("fight", "fightScene");
-    startScene.addChoice("run", "runningScene");
+    startScene.addChoice("fight", "fightScene", "swordSwing");
+    startScene.addChoice("run", "runningScene", "swordSwing");
     game.addScene(startScene);
 
     fightScene = new GameScene("fightScene", "You're fighting");
