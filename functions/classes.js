@@ -1,75 +1,85 @@
 class Game {
-    steps = [];
-    currentStepIndex = 0;
-    currentStep;
-    constructor() {
-        
-    }
+    scenes = [];
+    currentSceneIndex = 0;
+    currentScene;
+    constructor() {}
 
-    addStep(step) {
-        this.steps.push(step);
+    addScene(scene) {
+        this.scenes.push(scene);
     }
 
     makeChoice(description) {
-        for (let i = 0; i < this.currentStep.choices.length; i++) {
-            const choice = this.currentStep.choices[i];
+        for (let i = 0; i < this.currentScene.choices.length; i++) {
+            const choice = this.currentScene.choices[i];
             if (choice.description === description) {
                 // TODO: play the choice sound
-                
-                this.moveTo(choice.nextStep);
+                this.currentScene.playSoundscape();
+
+                this.moveTo(choice.nextScene);
                 //TODO: update scene in html
-                
+
 
             }
         }
     }
 
-    moveTo(stepId) {
-        for (let i = 0; i < this.steps.length; i++) {
-            const step = this.steps[i];
-            if (step.id === stepId) {
-                this.currentStepIndex = i;
-                this.currentStep = step;
+    moveTo(sceneId) {
+        for (let i = 0; i < this.scenes.length; i++) {
+            const scene = this.scenes[i];
+            if (scene.id === sceneId) {
+                this.currentSceneIndex = i;
+                this.currentScene = scene;
                 return;
             }
         }
-        console.log(`didn't find step for step id "${stepId}", check scenario!`)
+        console.log(`didn't find scene for scene id "${sceneId}", check scenario!`)
 
     }
 }
 
-class GameStep {
+class GameScene {
     //Dit zijn de intance-variables 
     id;
     choices = [];
     animations = [];
     storyLine = 'something iteresting happens for more than a minute...';
-    
-    constructor(id,storyLine) {
+    soundscape;
+
+    constructor(id, storyLine, soundscape) {
         this.id = id;
         this.storyLine = storyLine;
+        this.soundscape = soundscape;
     }
-    
-    addChoice(description, nextStep) {
-        this.choices.push(new Choice(description, nextStep));
+
+    addChoice(description, nextScene) {
+        this.choices.push(new Choice(description, nextScene));
     }
 
     addAnimation(image, ease) {
         this.animations.push(new Animation(image, ease));
     }
+
+    playSoundscape() {
+        if (this.soundscape) {
+            const audio = new Audio(`../assets/audio/${this.soundscape}.mp3`);
+            audio.loop = true;
+            audio.play();
+        }
+    }
+
 }
 
-class Choice{
+class Choice {
     description = 'you choose to ...'
-    nextStep;
+    nextScene;
 
-    constructor(description, nextStep) {
+    constructor(description, nextScene) {
         this.description = description;
-        this.nextStep = nextStep;
+        this.nextScene = nextScene;
     }
 }
 
-class Animation{
+class Animation {
     constructor(image, ease) {
         this.image = image;
         this.ease = ease;
@@ -78,16 +88,16 @@ class Animation{
 
 const testClasses = () => {
     game = new Game();
-    startScene = new GameStep("start", [], [], "you wake up in a cave");
+    startScene = new GameScene("start", "you wake up in a cave", "dragon");
     //add choices
     startScene.addChoice("fight", "fightScene");
     startScene.addChoice("run", "runningScene");
-    game.addStep(startScene);
+    game.addScene(startScene);
 
-    fightScene = new GameStep("fightScene", [], [], "You're fighting");
-    game.addStep(fightScene);
+    fightScene = new GameScene("fightScene", "You're fighting");
+    game.addScene(fightScene);
 
-    //should give warning, there is no step with id "bruh"
+    //should give warning, there is no scene with id "bruh"
     game.moveTo("bruh");
 
     //start the game
@@ -102,4 +112,3 @@ const testClasses = () => {
 const init = () => {
     testClasses();
 }
-init();
