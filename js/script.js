@@ -1,10 +1,10 @@
 
-const animationOne = () => {
+/* const animationOne = () => {
   var tl = gsap.timeline({repeat: 2, repeatDelay: 1});
   tl.to("img1", {x: 100, duration: 1});
   tl.to("img2", {y: 50, duration: 1});
   tl.to("img3", {opacity: 0, duration: 1});
-}
+} */
 
 const gameConfig = [
     {
@@ -35,7 +35,7 @@ const gameConfig = [
   const chooser = document.querySelector(".chooser");
   const actBtn = document.querySelector(".act-btn");
   
-  function act(choice) {
+  /* function act(choice) {
     prompt.textContent = gameConfig.filter(
       config => config.choice === choice
     )[0].prompt;
@@ -43,7 +43,7 @@ const gameConfig = [
       .filter(config => config.choice === choice)[0]
       .options.map(option => `<option value="${option}">${option}</option>`)
       .join("");
-  }
+  } */
   
   actBtn.addEventListener("click", () => act(chooser.value));
   

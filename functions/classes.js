@@ -1,6 +1,7 @@
 class Game {
     steps = [];
     currentStepIndex = 0;
+    currentStep;
     constructor() {
         
     }
@@ -9,11 +10,26 @@ class Game {
         this.steps.push(step);
     }
 
+    makeChoice(description) {
+        for (let i = 0; i < this.currentStep.choices.length; i++) {
+            const choice = this.currentStep.choices[i];
+            if (choice.description === description) {
+                // TODO: play the choice sound
+                
+                this.moveTo(choice.nextStep);
+                //TODO: update scene in html
+                
+
+            }
+        }
+    }
+
     moveTo(stepId) {
         for (let i = 0; i < this.steps.length; i++) {
             const step = this.steps[i];
             if (step.id === stepId) {
                 this.currentStepIndex = i;
+                this.currentStep = step;
                 return;
             }
         }
@@ -35,7 +51,7 @@ class GameStep {
     }
     
     addChoice(description, nextStep) {
-        choices.push(new Choice(description, nextStep));
+        this.choices.push(new Choice(description, nextStep));
     }
 
     addAnimation(image, ease) {
@@ -61,10 +77,29 @@ class Animation{
 }
 
 const testClasses = () => {
-    let game = new Game();
-    let step1 = new GameStep("start", [], [], "you wake up in a cave");
-    let step2 = new GameStep("end", [], [], "Game overrrrrrr");
-    game.addStep(step1);
-    game.addStep(step2);
+    game = new Game();
+    startScene = new GameStep("start", [], [], "you wake up in a cave");
+    //add choices
+    startScene.addChoice("fight", "fightScene");
+    startScene.addChoice("run", "runningScene");
+    game.addStep(startScene);
+
+    fightScene = new GameStep("fightScene", [], [], "You're fighting");
+    game.addStep(fightScene);
+
+    //should give warning, there is no step with id "bruh"
     game.moveTo("bruh");
+
+    //start the game
+    game.moveTo("start");
+
+
+    //test makeChoice function
+    game.makeChoice("fight")
+
 }
+
+const init = () => {
+    testClasses();
+}
+init();
