@@ -2,6 +2,8 @@ class Game {
     scenes = [];
     currentSceneIndex = 0;
     currentScene;
+    sceneListener;
+
     constructor() {}
 
     addScene(scene) {
@@ -29,11 +31,16 @@ class Game {
             if (scene.id === sceneId) {
                 this.currentSceneIndex = i;
                 this.currentScene = scene;
+                this.sceneListener(this.currentScene);
                 return;
             }
         }
         console.log(`didn't find scene for scene id "${sceneId}", check scenario!`)
 
+    }
+    // method to register a function to call when a scene changes
+    setSceneListener(sceneListener) {
+        this.sceneListener = sceneListener;
     }
 }
 
@@ -111,4 +118,5 @@ const testClasses = () => {
 
 const init = () => {
     testClasses();
+    
 }
