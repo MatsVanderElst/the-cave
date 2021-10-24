@@ -1,3 +1,27 @@
+class Game {
+    steps = [];
+    currentStepIndex = 0;
+    constructor() {
+        
+    }
+
+    addStep(step) {
+        this.steps.push(step);
+    }
+
+    moveTo(stepId) {
+        for (let i = 0; i < this.steps.length; i++) {
+            const step = this.steps[i];
+            if (step.id === stepId) {
+                this.currentStepIndex = i;
+                return;
+            }
+        }
+        console.log(`didn't find step for step id "${stepId}", check scenario!`)
+
+    }
+}
+
 class GameStep {
     //Dit zijn de intance-variables 
     id;
@@ -34,4 +58,13 @@ class Animation{
         this.image = image;
         this.ease = ease;
     }
+}
+
+const testClasses = () => {
+    let game = new Game();
+    let step1 = new GameStep("start", [], [], "you wake up in a cave");
+    let step2 = new GameStep("end", [], [], "Game overrrrrrr");
+    game.addStep(step1);
+    game.addStep(step2);
+    game.moveTo("bruh");
 }
