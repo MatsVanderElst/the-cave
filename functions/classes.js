@@ -44,10 +44,12 @@ class Game {
             const scene = this.scenes[i];
             if (scene.id === sceneId) {
                 this.currentSceneIndex = i;
+                let oldScene = this.currentScene;
                 this.currentScene = scene;
+
                 //update what user sees via listener
                 if (this.sceneListener) {
-                    this.sceneListener(this.currentScene);
+                    this.sceneListener(oldScene, this.currentScene);
                 }
                 return true;
             }
@@ -123,7 +125,18 @@ class Animation {
     }
 }
 
-const updateHTML = (scene) => {
+const updateHTML =  (oldScene, scene) => {
+
+    //dissolve the old images (oldScene might be undefined)
+    if (oldScene) {
+        for (let i = 0; i < oldScene.animations.length; i++) {
+            const animation = oldScene.animations[i];
+            if (gsap) {
+                gsap.to(`.${animation.cssClass}`, { duration: 2, opacity: 0, ease: animation.ease});
+            }
+        }
+    }
+    
     //description
     $sceneDescription = document.querySelector(".sceneDescription");
     $sceneDescription.innerHTML = scene.storyLine;
@@ -133,6 +146,8 @@ const updateHTML = (scene) => {
     $sceneButtons = document.querySelector(".button__container");
     $sceneButtons.innerHTML = buttons;
 
+   
+
     // render the images for the scene if neccecary
     if (scene.animations.length > 0) {
         const animations = scene.animations.map(animation => { return `<img class="${animation.cssClass}" alt="${animation.cssClass}" src="${animation.image}">` }).join("");
@@ -140,19 +155,28 @@ const updateHTML = (scene) => {
         $container.innerHTML = animations;
     }
 
+    
+
     //animate the images
     for (let i = 0; i < scene.animations.length; i++) {
         const animation = scene.animations[i];
-        gsap.to(`.${animation.cssClass}`, { duration: animation.duration, x: animation.x, ease: animation.ease});
+        if (gsap) {     
+            gsap.to(`.${animation.cssClass}`, { duration: animation.duration, x: animation.x, ease: animation.ease});
+        }
     }
     /* gsap.to(".dragon1", { duration: 3, x: -500, ease: "expo" }); */
+
 }
 
 const testClasses = () => {
     game = new Game(updateHTML);
-    scene = new GameScene("start", "you wake up in a cave", "dragon");
-    
-    //add choices
+    scene = new GameScene("start", "you wake up in a cave", "morning");
+    scene.addChoice("start game", "dragonScene", "runningAway");
+    scene.addAnimation("knight1", "expo", 3, 300);
+    game.addScene(scene);
+
+
+    scene = new GameScene("dragonScene", "A giant fire breathing dragon appears in front of you! what do you do?", "swordSwing");
     scene.addChoice("fight", "fightScene", "swordSwing");
     scene.addChoice("run", "runningScene", "runningAway");
     scene.addAnimation("knight1", "expo", 3, 300); 
@@ -163,6 +187,8 @@ const testClasses = () => {
     scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!");
     scene.addChoice("Sword", "swordScene", "swordSwing");
     scene.addChoice("Axe", "axeScene", "swordSwing");
+    scene.addAnimation("knight1", "expo", 3, 300); 
+    scene.addAnimation("dragon1", "expo", 3, -300);
     game.addScene(scene);
     
     
@@ -170,6 +196,8 @@ const testClasses = () => {
     scene.addChoice("stab", "stabScene", "dragon");
     scene.addChoice("throw", "deathScene", "cursing");
     scene.addChoice("swing", "deathScene", "cursing");
+    scene.addAnimation("knight1", "expo", 3, 300); 
+    scene.addAnimation("dragon1", "expo", 3, -300);
     game.addScene(scene);
     
     //should return false because scene id's must be uniqe
@@ -192,5 +220,7 @@ const testClasses = () => {
 
 const init = () => {
     testClasses();
-    
+    game.moveTo("start");
 }
+
+init();
