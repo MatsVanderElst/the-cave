@@ -148,16 +148,25 @@ class Animation {
 const updateHTML =  (oldScene, scene) => {
 
     //dissolve the old images (oldScene might be undefined)
-    if (oldScene) {
+    if (oldScene && oldScene.animations.length > 0) {
         for (let i = 0; i < oldScene.animations.length; i++) {
             const animation = oldScene.animations[i];
             if (gsap) {
-                gsap.to(`.${animation.cssClass}`, { duration: 6, opacity: 0, ease: animation.ease });
+                gsap.to(`.${animation.cssClass}`, { duration: 2, opacity: 0, ease: animation.ease });
 /*                 gsap.to(".gsap",{opacity:0, ease:"bounce"});
- */            }
+ */          }
         }
+
+        setTimeout(() => { drawNewScene(scene) }, 2000);
+    } else {
+        drawNewScene(scene);
     }
     
+    
+}
+
+const drawNewScene = (scene) => {
+
     //description
     $sceneDescription = document.querySelector(".sceneDescription");
     $sceneDescription.innerHTML = scene.storyLine;
@@ -196,7 +205,5 @@ const updateHTML =  (oldScene, scene) => {
         }
     }
     /* gsap.to(".dragon1", { duration: 3, x: -500, ease: "expo" }); */
-
-
 }
 
