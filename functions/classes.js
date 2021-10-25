@@ -28,12 +28,24 @@ class Game {
         for (let i = 0; i < this.currentScene.choices.length; i++) {  
             const choice = this.currentScene.choices[i];
             if (choice.description === description) {
-                // play choice sound             
-                choice.playChoiceSound();
-
-                //moveuser to the next scene     
-                this.moveTo(choice.nextScene);
-
+            
+                // play choice sound           
+                const audio = choice.playChoiceSound();
+                
+                //we have to wait untill audio file has been loaded to check duration
+                if (audio) {
+                    audio.onloadedmetadata = function () {
+                        console.log(audio.duration);
+                        const duration = audio.duration * 1000;
+                        
+                        //move user to the next scene when choice sound has played 
+                        setTimeout(function () { game.moveTo(choice.nextScene); }, duration);
+                    };    
+                } else {
+                    //no need to wait,no sound is playing
+                    this.moveTo(choice.nextScene);
+                }
+                
             }
         }
     }
@@ -109,11 +121,16 @@ class Choice {
         this.nextScene = nextScene;
         this.choiceSound = choiceSound;
     }
+
+    //plays sound and returns duration in miliseconds of played audio
     playChoiceSound() {
         if (this.choiceSound) {
             const audio = new Audio(`../assets/audio/${this.choiceSound}.mp3`);
             audio.play();
+            
+            return audio;
         }
+        return undefined;
     }
 }
 
@@ -135,12 +152,11 @@ const updateHTML =  (oldScene, scene) => {
         for (let i = 0; i < oldScene.animations.length; i++) {
             const animation = oldScene.animations[i];
             if (gsap) {
-                gsap.to(`.${animation.cssClass}`, { duration: 2, opacity: 0, ease: animation.ease});
-            }
+                gsap.to(`.${animation.cssClass}`, { duration: 6, opacity: 0, ease: animation.ease });
+/*                 gsap.to(".gsap",{opacity:0, ease:"bounce"});
+ */            }
         }
     }
-
-    
     
     //description
     $sceneDescription = document.querySelector(".sceneDescription");

@@ -1,19 +1,28 @@
 const buildScenario = () => {
   game = new Game(updateHTML);
-  scene = new GameScene("start", "you wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the shadows...", "morning", "caveBackground");
-  scene.addChoice("start game", "dragonScene", "runningAway");
+
+  scene = new GameScene("start", "click on the green button below to start the journey");
+  scene.addChoice("click here to begin", "intro", undefined);
+  game.addScene(scene);
+
+  scene = new GameScene("intro", "This is a choose your own adventure game, make the right choices and try to reach the end!", "introduction", "caveBackground");
+  scene.addChoice("click here to begin", "caveScene", undefined);
+  game.addScene(scene);
+
+  scene = new GameScene("caveScene", "you wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the shadows...", "growl", "caveBackground");
+  scene.addChoice("get up", "dragonScene", "dragonGrowl1");
   game.addScene(scene);
 
 
-  scene = new GameScene("dragonScene", "A giant fire breathing dragon appears in front of you! what do you do?", "dragonGrowl1", "caveBackground");
-  scene.addChoice("fight", "fightScene", "swordSwing");
+  scene = new GameScene("dragonScene", "A giant fire breathing dragon appears in front of you! what do you do?", "firebreathing", "caveBackground");
+  scene.addChoice("fight", "fightScene", "dirtyDragon");
   scene.addChoice("run", "runningScene", "runningAway");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
   
   
-  scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!","dragonGrowl1", "fightSceneBackground");
+  scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!", undefined, "fightSceneBackground");
   scene.addChoice("sword", "swordScene", "swordSwing");
   scene.addChoice("magic", "axeScene", "swordSwing");
   scene.addAnimation("sword1", "expo", 3, 300); 
