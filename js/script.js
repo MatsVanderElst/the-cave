@@ -1,47 +1,39 @@
-
-/* const animationOne = () => {
-  var tl = gsap.timeline({repeat: 2, repeatDelay: 1});
-  tl.to("img1", {x: 100, duration: 1});
-  tl.to("img2", {y: 50, duration: 1});
-  tl.to("img3", {opacity: 0, duration: 1});
-} */
-
-/* const gameConfig = [
-  {
-    choice: "Start",
-    prompt: "A dragon is in front of you!",
-    options: ["Run", "Fight"],
-     animation: animationOne
-  },
-  {
-    choice: "Run",
-    prompt: "There's a wall in front of you.",
-    options: ["Climb", "Go around"]
-  },
-  {
-    choice: "Fight",
-    prompt: "The dragon breathes fire!",
-    options: ["Duck", "Jump"]
-  }
-];
- */
+const buildScenario = () => {
+  game = new Game(updateHTML);
+  scene = new GameScene("start", "you wake up in a cave", "morning");
+  scene.addChoice("start game", "dragonScene", "runningAway");
+  scene.addAnimation("knight1", "expo", 3, 300);
+  game.addScene(scene);
 
 
-/* 
-const prompt = document.querySelector(".prompt");
-const chooser = document.querySelector(".chooser");
-const actBtn = document.querySelector(".act-btn");
- */
-/* function act(choice) {
-  prompt.textContent = gameConfig.filter(
-    config => config.choice === choice
-  )[0].prompt;
-  chooser.innerHTML = gameConfig
-    .filter(config => config.choice === choice)[0]
-    .options.map(option => `<option value="${option}">${option}</option>`)
-    .join("");
-} */
+  scene = new GameScene("dragonScene", "A giant fire breathing dragon appears in front of you! what do you do?", "swordSwing");
+  scene.addChoice("fight", "fightScene", "swordSwing");
+  scene.addChoice("run", "runningScene", "runningAway");
+  scene.addAnimation("knight1", "expo", 3, 300); 
+  scene.addAnimation("dragon1", "expo", 3, -300);
+  game.addScene(scene);
+  
+  
+  scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!");
+  scene.addChoice("Sword", "swordScene", "swordSwing");
+  scene.addChoice("Axe", "axeScene", "swordSwing");
+  scene.addAnimation("knight1", "expo", 3, 300); 
+  scene.addAnimation("dragon1", "expo", 3, -300);
+  game.addScene(scene);
+  
+  
+  scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!");
+  scene.addChoice("stab", "stabScene", "dragon");
+  scene.addChoice("throw", "deathScene", "cursing");
+  scene.addChoice("swing", "deathScene", "cursing");
+  scene.addAnimation("knight1", "expo", 3, 300); 
+  scene.addAnimation("dragon1", "expo", 3, -300);
+  game.addScene(scene);
+}
 
-/* actBtn.addEventListener("click", () => act(chooser.value)); */
+const init = () => {
+  buildScenario();
+  game.moveTo("start");
+}
 
-/* act("Start"); */
+init();

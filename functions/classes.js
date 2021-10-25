@@ -1,4 +1,6 @@
 //Site used for sounds: https://quicksounds.com/search/filter/tracks/sword
+const debugScenario = true;
+
 
 class Game {
     scenes = [];
@@ -32,9 +34,6 @@ class Game {
                 //moveuser to the next scene     
                 this.moveTo(choice.nextScene);
 
-
-                // TODO: play the choice sound   
-                this.currentScene.playSoundscape();
             }
         }
     }
@@ -51,6 +50,8 @@ class Game {
                 if (this.sceneListener) {
                     this.sceneListener(oldScene, this.currentScene);
                 }
+                //play the soundscape   
+                this.currentScene.playSoundscape();
                 return true;
             }
         }
@@ -146,6 +147,14 @@ const updateHTML =  (oldScene, scene) => {
     $sceneButtons = document.querySelector(".button__container");
     $sceneButtons.innerHTML = buttons;
 
+
+    // render buttons for easy debugging of scenario
+    if (debugScenario) {
+        const testButtons = game.scenes.map(scene => { return `<button class="btn" onclick="game.moveTo('${scene.id}');">${scene.id}</button>` }).join("");
+        $testButtons = document.querySelector(".testButton__container");
+        $testButtons.innerHTML = testButtons;
+    
+    }
    
 
     // render the images for the scene if neccecary
@@ -154,7 +163,6 @@ const updateHTML =  (oldScene, scene) => {
         $container = document.querySelector(".animation__container");
         $container.innerHTML = animations;
     }
-
     
 
     //animate the images
@@ -166,61 +174,6 @@ const updateHTML =  (oldScene, scene) => {
     }
     /* gsap.to(".dragon1", { duration: 3, x: -500, ease: "expo" }); */
 
-}
-
-const testClasses = () => {
-    game = new Game(updateHTML);
-    scene = new GameScene("start", "you wake up in a cave", "morning");
-    scene.addChoice("start game", "dragonScene", "runningAway");
-    scene.addAnimation("knight1", "expo", 3, 300);
-    game.addScene(scene);
-
-
-    scene = new GameScene("dragonScene", "A giant fire breathing dragon appears in front of you! what do you do?", "swordSwing");
-    scene.addChoice("fight", "fightScene", "swordSwing");
-    scene.addChoice("run", "runningScene", "runningAway");
-    scene.addAnimation("knight1", "expo", 3, 300); 
-    scene.addAnimation("dragon1", "expo", 3, -300);
-    game.addScene(scene);
-    
-    
-    scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!");
-    scene.addChoice("Sword", "swordScene", "swordSwing");
-    scene.addChoice("Axe", "axeScene", "swordSwing");
-    scene.addAnimation("knight1", "expo", 3, 300); 
-    scene.addAnimation("dragon1", "expo", 3, -300);
-    game.addScene(scene);
-    
-    
-    scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!");
-    scene.addChoice("stab", "stabScene", "dragon");
-    scene.addChoice("throw", "deathScene", "cursing");
-    scene.addChoice("swing", "deathScene", "cursing");
-    scene.addAnimation("knight1", "expo", 3, 300); 
-    scene.addAnimation("dragon1", "expo", 3, -300);
-    game.addScene(scene);
-    
-    //should return false because scene id's must be uniqe
-    if (game.addScene(new GameScene("start","this Scene should be rejected by the game"))) {
-        return; // Gosh darnit, we have a failed test
-    }
-
-    //should return false, there is no scene with id "bruh"
-    if (game.moveTo("bruh") === true) {
-        return;// Gosh darnit, we have a failed test
-    }
-    
-
-    //start the game, schould return true
-    if (game.moveTo("start") === false) {
-        return;// Gosh darnit, we have a failed test
-    }
 
 }
 
-const init = () => {
-    testClasses();
-    game.moveTo("start");
-}
-
-init();
