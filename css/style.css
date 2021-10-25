@@ -60,6 +60,10 @@ main {
   background-position: bottom;
 }
 
+.hide{
+  display: none;
+}
+
 .animation__container img{
   width: 400px;
   height: auto;

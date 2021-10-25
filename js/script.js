@@ -1,13 +1,13 @@
 const buildScenario = () => {
   game = new Game(updateHTML);
 
-  scene = new GameScene("start", "click on the green button below to start the journey");
-  scene.addChoice("click here to begin", "intro", undefined);
+  scene = new GameScene("start", "PG-13: Parents Strongly Cautioned, Some Material May Be Inappropriate for Children Under 13. This rating is a stronger caution for parents that content included may not be appropriate for children under 13 (pre-teen ages). This may include stronger language, extended violence against dragons or battle situations and potion-use.");
+  scene.addChoice("Start Adventure", "caveScene", undefined);
   game.addScene(scene);
 
-  scene = new GameScene("intro", "This is a choose your own adventure game, make the right choices and try to reach the end!", "introduction", "caveBackground");
+  /* scene = new GameScene("intro", "This is a choose your own adventure game, make the right choices and try to reach the end!", "introduction", "caveBackground");
   scene.addChoice("click here to begin", "caveScene", undefined);
-  game.addScene(scene);
+  game.addScene(scene); */
 
   scene = new GameScene("caveScene", "you wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the shadows...", "growl", "caveBackground");
   scene.addChoice("get up", "dragonScene", "dragonGrowl1");

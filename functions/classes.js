@@ -187,7 +187,12 @@ const drawNewScene = (scene) => {
     
     // change the background
     $container = document.querySelector(".animation__container");
-    $container.style.backgroundImage=`url(../assets/img/${scene.background}.jpg)`;
+    if (scene.background) {
+        $container.style.backgroundImage = `url(../assets/img/${scene.background}.jpg)`;
+        $container.classList.remove("hide");
+    } else {
+        $container.classList.add("hide");
+    }
     
     
     // render the images for the scene if neccecary
