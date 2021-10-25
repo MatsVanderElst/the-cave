@@ -1,6 +1,6 @@
 const buildScenario = () => {
   game = new Game(updateHTML);
-  scene = new GameScene("start", "you wake up in a cave", "morning");
+  scene = new GameScene("start", "you wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the end of the cave...", "morning", "caveBackground");
   scene.addChoice("start game", "dragonScene", "runningAway");
   scene.addAnimation("knight1", "expo", 3, 300);
   game.addScene(scene);
@@ -9,7 +9,7 @@ const buildScenario = () => {
   scene = new GameScene("dragonScene", "A giant fire breathing dragon appears in front of you! what do you do?", "swordSwing");
   scene.addChoice("fight", "fightScene", "swordSwing");
   scene.addChoice("run", "runningScene", "runningAway");
-  scene.addAnimation("knight1", "expo", 3, 300); 
+  scene.addAnimation("knight1", "expo", 3, 400); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
   

@@ -72,11 +72,13 @@ class GameScene {
     animations = [];
     storyLine = 'something iteresting happens for more than a minute...';
     soundscape;
+    background;
 
-    constructor(id, storyLine, soundscape) {
+    constructor(id, storyLine, soundscape, background) {
         this.id = id;
         this.storyLine = storyLine;
         this.soundscape = soundscape;
+        this.background = background;
     }
 
     addChoice(description, nextScene, choiceSound) {
@@ -137,30 +139,35 @@ const updateHTML =  (oldScene, scene) => {
             }
         }
     }
+
+    
     
     //description
     $sceneDescription = document.querySelector(".sceneDescription");
     $sceneDescription.innerHTML = scene.storyLine;
-
+    
     //render the buttons for choices in the scene
     const buttons = scene.choices.map(choice => { return `<button class="btn" onclick="game.makeChoice('${choice.description}');">${choice.description}</button>` }).join("");
     $sceneButtons = document.querySelector(".button__container");
     $sceneButtons.innerHTML = buttons;
-
-
+    
+    
     // render buttons for easy debugging of scenario
     if (debugScenario) {
         const testButtons = game.scenes.map(scene => { return `<button class="btn" onclick="game.moveTo('${scene.id}');">${scene.id}</button>` }).join("");
         $testButtons = document.querySelector(".testButton__container");
         $testButtons.innerHTML = testButtons;
-    
+        
     }
-   
-
+    
+    // change the background
+    $container = document.querySelector(".animation__container");
+    $container.style.backgroundImage=`url(../assets/img/${scene.background}.jpg)`;
+    
+    
     // render the images for the scene if neccecary
     if (scene.animations.length > 0) {
         const animations = scene.animations.map(animation => { return `<img class="${animation.cssClass}" alt="${animation.cssClass}" src="${animation.image}">` }).join("");
-        $container = document.querySelector(".animation__container");
         $container.innerHTML = animations;
     }
     

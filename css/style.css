@@ -12,15 +12,72 @@ html, body{
 
 html {
   box-sizing: inherit;
+  background-color:rgba(34, 104, 255, 0.37);
+  background-image: url("../assets/img/gameBackground.jpg");
+  background-size: 100%;
 }
 
-body {
+main {
   font-family: Helvetica, Arial, sans-serif;
   font-size: var(--default-font-size);
   margin: 2rem;
 }
 
+.title{
+  text-align: center;
+  font-family: brioso-pro-caption,serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 4rem;
+   
+/*   border-bottom: solid green 0.5rem; 
+ */}
+
+.sceneDescription{
+  height: 4rem;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 90rem;
+  margin-left: 12rem;
+
+  font-family: brioso-pro,serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 2rem;
+}
+
+.animation__container{
+  border:solid 5px hsla(0, 95%, 35%, 1);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+
+  height: 40rem;
+  width: 90rem;
+  margin-left: 12rem;
+  overflow: hidden;
+  background-color:white;
+  background-size: 100%;
+  background-position: bottom;
+}
+
+.button__container{
+  text-align: center;
+}
+
+.button__container button{
+  text-align: center;
+  background-color: #18911c; /* Green */
+  border-color: goldenrod;
+  border-width: 0.5rem;
+  border-radius: 20%;
+  font-size: 3rem;
+  width: 20rem;
+  margin: 1rem;
+}
+
+.knight1{
+  position: absolute;}
+
 .dragon1{
-  position: fixed;
-  right: -400px;
+  position: absolute;  right: 100px;
 }
