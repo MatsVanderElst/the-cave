@@ -60,6 +60,13 @@ main {
   background-position: bottom;
 }
 
+.animation__container img{
+  width: 400px;
+  height: auto;
+  position: absolute;
+  top: 25rem
+}
+
 .button__container{
   text-align: center;
 }
@@ -76,8 +83,23 @@ main {
 }
 
 .knight1{
-  position: absolute;}
+  position: absolute;
+  left: 100px;
+}
 
 .dragon1{
-  position: absolute;  right: 100px;
+  position: absolute;  
+  right: 100px;
+}
+
+.wand1{
+  position: absolute;
+  right: 100px;
+}
+
+img .sword1{
+  position: absolute;
+  left: 100px;
+  width: 200px;
+  height: auto;
 }
