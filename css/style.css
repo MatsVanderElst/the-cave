@@ -20,7 +20,8 @@ html {
 main {
   font-family: Helvetica, Arial, sans-serif;
   font-size: var(--default-font-size);
-  margin: 2rem;
+  margin: 3rem;
+  text-align: center;
 }
 
 .title{
@@ -29,17 +30,19 @@ main {
   font-weight: 700;
   font-style: italic;
   font-size: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
    
 /*   border-bottom: solid green 0.5rem; 
  */}
 
 .sceneDescription{
-  height: 4rem;
   text-align: center;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  width: 90rem;
-  margin-left: 12rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  
+  width: 80%;
+  height: 4rem;
 
   font-family: brioso-pro,serif;
   font-weight: 500;
@@ -48,15 +51,20 @@ main {
 }
 
 .animation__container{
-  border:solid 5px hsla(0, 95%, 35%, 1);
+  position: relative;
+
+  border:solid 5px rgb(174, 58, 4);
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 
-  height: 40rem;
-  width: 90rem;
-  margin-left: 12rem;
+  height: 35rem;
+  width: 70rem;
   overflow: hidden;
   background-size: 100%;
   background-position: bottom;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hide{
@@ -64,10 +72,10 @@ main {
 }
 
 .animation__container img{
-  width: 400px;
+  width: 20.834rem;
   height: auto;
   position: absolute;
-  top: 25rem
+  top: 7rem
 }
 
 .button__container{
@@ -92,7 +100,8 @@ main {
 
 .knight1{
   position: absolute;
-  left: 100px;
+  width: 8.333rem;
+  right: 60rem;
 }
 
 .deadKnight{
@@ -102,23 +111,25 @@ main {
 }
 
 .dragon1{
-  position: absolute;  
-  right: 100px;
+  position: absolute;
+  width: 8.333rem;
+  left: 60rem;
 }
 
 .dragon2{
-  position: absolute;  
-  right: 100px;
+  position: absolute;
+  width: 8.333rem;
+  left: 60rem;
 }
 
 .wand1{
   position: absolute;
-  right: 100px;
+  width: 8.333rem;
+  left: 60rem;
 }
 
-img .sword1{
+.sword1{
   position: absolute;
-  left: 100px;
-  width: 200px;
-  height: auto;
+  width: 8.333rem;
+  right: 60rem;
 }

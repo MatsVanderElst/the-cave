@@ -24,7 +24,7 @@ const buildScenario = () => {
   
   scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!", "hurry", "caveBackground");
   scene.addChoice("sword", "swordScene", "swordSwing");
-  scene.addChoice("magic", "axeScene", "swordSwing");
+  scene.addChoice("magic", "magicScene", "magicSpell");
   scene.addAnimation("sword1", "expo", 3, 300); 
   scene.addAnimation("wand1", "expo", 3, -300);
   game.addScene(scene);
@@ -33,22 +33,31 @@ const buildScenario = () => {
   scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!", "pickup","caveBackground");
   scene.addChoice("stab", "stabScene", "stab");
   scene.addChoice("throw", "deathScene", "throw");
-  scene.addChoice("swing", "deathScene", "stab");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
 
-  scene = new GameScene("stabScene", "your stab wounded the dragon!but what is your next move?", "wounded", "caveBackground");
+  scene = new GameScene("stabScene", "your stab wounded the dragon! but what is your next move?", "wounded", "caveBackground");
   scene.addChoice("stab again", "stabDeath", "stab");
-  scene.addChoice("run away", "run2", "stab");
+  scene.addChoice("run away", "runningScene", "stab");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon2", "expo", 3, -300);
   game.addScene(scene);
-
+  
   scene = new GameScene("stabDeath", "you thried to finish the job but allas... you couldn't...", "stabDeath", "caveBackground");
-  scene.addChoice("find another way", "caveScene", "revive");
   scene.addAnimation("deadKnight", "expo", 3, 300);
   game.addScene(scene);
+
+  scene = new GameScene("runningScene", "You sprint away from the savage beast as you hear it growling in pain, but which way should you go?", "runafterstab", "splitBackground");
+  scene.addChoice("right", "rightScene", "going");
+  scene.addChoice("left", "leftScene", "left");
+  game.addScene(scene);
+
+  scene = new GameScene("rightScene", "You enter a large room with 3 doors, it looks familliar, wich door should you open?  ?", "treedoorsdown", "splitBackground");
+  scene.addChoice("right", "rightScene", "right");
+  game.addScene(scene);
+
+
 
 }
 

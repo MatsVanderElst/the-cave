@@ -106,6 +106,7 @@ class GameScene {
         if (this.soundscape) {
             const audio = new Audio(`../assets/audio/${this.soundscape}.mp3`);
             audio.loop = false; //==> TODO: check om zachter te spelen
+            audio.volume = 0.7;
             audio.play();
         }
     }
@@ -158,7 +159,7 @@ const updateHTML =  (oldScene, scene) => {
  */          }
         }
 
-        setTimeout(() => { drawNewScene(scene) }, 2000);
+        setTimeout(() => { drawNewScene(scene) }, 1500);
     } else {
         drawNewScene(scene);
     }
