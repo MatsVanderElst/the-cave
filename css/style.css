@@ -55,7 +55,6 @@ main {
   width: 90rem;
   margin-left: 12rem;
   overflow: hidden;
-  background-color:white;
   background-size: 100%;
   background-position: bottom;
 }
@@ -91,7 +90,18 @@ main {
   left: 100px;
 }
 
+.deadKnight{
+  position: absolute;
+  left: 25rem;
+  bottom: 5rem;
+}
+
 .dragon1{
+  position: absolute;  
+  right: 100px;
+}
+
+.dragon2{
   position: absolute;  
   right: 100px;
 }
