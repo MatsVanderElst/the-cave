@@ -9,8 +9,8 @@ const buildScenario = () => {
   scene.addChoice("click here to begin", "caveScene", undefined);
   game.addScene(scene); */
 
-  scene = new GameScene("caveScene", "you wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the shadows...", "growl", "caveBackground");
-  scene.addChoice("follow sound", "dragonScene", "dragonGrowl1");
+  scene = new GameScene("caveScene", "You wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the shadows...", "growl", "caveBackground");
+  scene.addChoice("Follow sound", "dragonScene", "dragonGrowl1");
   scene.addAnimation("knightnosword", "expo", 3, -300);
   game.addScene(scene);
 
@@ -23,71 +23,68 @@ const buildScenario = () => {
   game.addScene(scene);
   
   scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!", "hurry", "caveBackground");
-  scene.addChoice("sword", "swordScene", "swordSwing");
-  scene.addChoice("magic", "magicScene", "magic");
+  scene.addChoice("Sword", "swordScene", "swordSwing");
+  scene.addChoice("Magic", "magicScene", "magic");
   scene.addAnimation("sword1", "expo", 3, 300); 
   scene.addAnimation("wand1", "expo", 3, -300);
   game.addScene(scene);
 
-  scene = new GameScene("magicScene", "you don't know much about magic, should you really drink this teleportation potion?", "magicdesc", "caveBackground");
-  scene.addChoice("use sword", "swordScene", "swordSwing");
-  scene.addChoice("drink potion", "magicScene", "drink");
+  scene = new GameScene("magicScene", "You don't know much about magic, should you really drink this teleportation potion?", "magicdesc", "caveBackground");
+  scene.addChoice("Use sword", "swordScene", "swordSwing");
+  scene.addChoice("Drink potion", "magicScene", "drink");
   scene.addAnimation("sword1", "expo", 3, 300); 
   scene.addAnimation("potion", "expo", 3, -300);
   game.addScene(scene);
   
   
   scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!", "pickup","caveBackground");
-  scene.addChoice("stab", "stabScene", "stab");
-  scene.addChoice("throw", "stabScene", "throw");
+  scene.addChoice("Stab", "stabScene", "stab");
+  scene.addChoice("Throw", "stabScene", "throw");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
 
-  scene = new GameScene("stabScene", "your sword wounded the dragon! but what is your next move?", "wounded", "caveBackground");
-  scene.addChoice("stab", "stabDeath", "stab");
-  scene.addChoice("run away", "runningScene", "going");
+  scene = new GameScene("stabScene", "Your sword wounded the dragon! but what is your next move?", "wounded", "caveBackground");
+  scene.addChoice("Stab", "stabDeath", "stab");
+  scene.addChoice("Run away", "runningScene", "going");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon2", "expo", 3, -300);
   game.addScene(scene);
   
-  scene = new GameScene("stabDeath", "you thried to finish the job but allas... you couldn't...", "stabDeath", "caveBackground");
-  scene.addChoice("find another way", "caveScene", "going");
-  scene.addAnimation("deadKnight", "expo", 3, 300);
+  scene = new GameScene("stabDeath", "You tried to finish the job but alas... you couldn't...", "stabDeath", "caveBackground");
+  scene.addChoice("Find another way", "caveScene", "going");
+  scene.addAnimation("deadKnight", "expo", 3, -300);
   game.addScene(scene);
 
   scene = new GameScene("runningScene", "You sprint away from the savage beast as you hear it growling away, but which way should you go?", "runafterstab", "splitBackground");
-  scene.addChoice("right", "doorScene", "going");
-  scene.addChoice("left", "leftScene", "left");
+  scene.addChoice("Light", "doorScene", "going");
+  scene.addChoice("Left", "leftScene", "herewego");
   game.addScene(scene);
 
-  scene = new GameScene("doorScene", "You enter a large room with 3 doors, it looks familliar, wich door should you open?  ?", "treedoorsdown", "doorsBackground");
-  scene.addChoice("right door", "rightScene", "Door");
-  scene.addChoice("middle door", "middleScene", "Door");
-  scene.addChoice("left door", "leftScene", "Door");
+  scene = new GameScene("doorScene", "You enter a large room with 3 doors, it looks familliar, wich door should you open?", "treedoorsdown", "doorsBackground");
+  scene.addChoice("Door 1", "rightScene", "Door");
+  scene.addChoice("Door 2", "middleScene", "Door");
+  scene.addChoice("Door 3", "leftScene", "Door");
   scene.addAnimation("leftdoor", "expo", 3, -300);
   scene.addAnimation("middledoor", "expo", 3, 0); 
   scene.addAnimation("rightdoor", "expo", 3, 300); 
   game.addScene(scene);
 
-  scene = new GameScene("rightScene", "you find yourself on a split with a familliar blue gem, which way do you go?", "bluegemdesc", "bluesplitbackground");
-  scene.addChoice("left", "middleScene", "herewego");
-  scene.addChoice("right", "doorScene", "going");
+  scene = new GameScene("rightScene", "You find yourself on a split with a familliar blue gem, which way do you go?", "bluegemdesc", "bluesplitbackground");
+  scene.addChoice("Left", "middleScene", "herewego");
+  scene.addChoice("Right", "doorScene", "going");
   game.addScene(scene);
 
 
-  scene = new GameScene("middleScene", "you find yourself on a split with a red gem, which way do you go?", "redgemdesc", "redsplitbackground");
-  scene.addChoice("left", "rightScene", "herewego");
-  scene.addChoice("right", "doorScene", "going");
+  scene = new GameScene("middleScene", "You find yourself on a split with a red gem, which way do you go?", "redgemdesc", "redsplitbackground");
+  scene.addChoice("Left", "rightScene", "herewego");
+  scene.addChoice("Right", "doorScene", "going");
   game.addScene(scene);
 
   scene = new GameScene("leftScene", "Finally you see the light at the end of the tunnel, you made is out alive...", "exitdesc", "exitbackground");
-  scene.addChoice("find another way", "caveScene", "going");
+  scene.addChoice("Find another way", "caveScene", "going");
   scene.addAnimation("knight2", "expo", 3, -300); 
   game.addScene(scene);
-
-
-  /* throwScene */
 
 }
 

@@ -1,7 +1,7 @@
 //Site used for sounds: https://quicksounds.com/search/filter/tracks/sword
 
 //set to true to easily hop between scenes
-const debugScenario = true;
+const debugScenario = false;
 
 class Game {
     scenes = [];

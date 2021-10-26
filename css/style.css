@@ -102,6 +102,7 @@ main {
   position: absolute;
   width: 8.333rem;
   right: 60rem;
+  margin-top: 6rem;
 }
 
 .knightnosword{
@@ -113,19 +114,22 @@ main {
 .deadKnight{
   position: absolute;
   width: 8.333rem;
-  right: 45rem;
+  left: 60rem;
+  margin-top: 8rem;
 }
 
 .dragon1{
   position: absolute;
   width: 8.333rem;
   left: 60rem;
+  margin-top: 6rem;
 }
 
 .dragon2{
   position: absolute;
   width: 8.333rem;
   left: 60rem;
+  margin-top: 6rem;
 }
 
 .wand1{
