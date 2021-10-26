@@ -32,30 +32,53 @@ const buildScenario = () => {
   
   scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!", "pickup","caveBackground");
   scene.addChoice("stab", "stabScene", "stab");
-  scene.addChoice("throw", "deathScene", "throw");
+  scene.addChoice("throw", "throwScene", "throw");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
 
   scene = new GameScene("stabScene", "your stab wounded the dragon! but what is your next move?", "wounded", "caveBackground");
   scene.addChoice("stab again", "stabDeath", "stab");
-  scene.addChoice("run away", "runningScene", "stab");
+  scene.addChoice("run away", "runningScene", "going");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon2", "expo", 3, -300);
   game.addScene(scene);
   
   scene = new GameScene("stabDeath", "you thried to finish the job but allas... you couldn't...", "stabDeath", "caveBackground");
+  scene.addChoice("find another way", "caveScene", "going");
   scene.addAnimation("deadKnight", "expo", 3, 300);
   game.addScene(scene);
 
-  scene = new GameScene("runningScene", "You sprint away from the savage beast as you hear it growling in pain, but which way should you go?", "runafterstab", "splitBackground");
-  scene.addChoice("right", "rightScene", "going");
+  scene = new GameScene("runningScene", "You sprint away from the savage beast as you hear it growling away, but which way should you go?", "runafterstab", "splitBackground");
+  scene.addChoice("right", "doorScene", "going");
   scene.addChoice("left", "leftScene", "left");
   game.addScene(scene);
 
-  scene = new GameScene("rightScene", "You enter a large room with 3 doors, it looks familliar, wich door should you open?  ?", "treedoorsdown", "splitBackground");
-  scene.addChoice("right", "rightScene", "right");
+  scene = new GameScene("doorScene", "You enter a large room with 3 doors, it looks familliar, wich door should you open?  ?", "treedoorsdown", "doorsBackground");
+  scene.addChoice("right door", "rightScene", "Door");
+  scene.addChoice("middle door", "middleScene", "Door");
+  scene.addChoice("left door", "leftScene", "Door");
+  scene.addAnimation("leftdoor", "expo", 3, -300);
+  scene.addAnimation("middledoor", "expo", 3, 0); 
+  scene.addAnimation("rightdoor", "expo", 3, 300); 
   game.addScene(scene);
+
+  scene = new GameScene("rightScene", "you find yourself on a split with a familliar blue gem, which way do you go?", "bluegemdesc", "bluesplitbackground");
+  scene.addChoice("left", "middleScene", "herewego");
+  scene.addChoice("right", "doorScene", "going");
+  game.addScene(scene);
+
+
+  scene = new GameScene("middleScene", "you find yourself on a split with a red gem, which way do you go?", "redgemdesc", "redsplitbackground");
+  scene.addChoice("left", "rightScene", "herewego");
+  scene.addChoice("right", "doorScene", "going");
+  game.addScene(scene);
+
+  scene = new GameScene("leftScene", "Finally you see the light at the end of the tunnel, you made is out alive...", "exitdesc", "exitbackground");
+  scene.addChoice("find another way", "caveScene", "going");
+  scene.addAnimation("knight2", "expo", 3, -300); 
+  game.addScene(scene);
+
 
 
 

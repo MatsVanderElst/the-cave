@@ -106,8 +106,8 @@ main {
 
 .deadKnight{
   position: absolute;
-  left: 25rem;
-  bottom: 5rem;
+  width: 8.333rem;
+  right: 45rem;
 }
 
 .dragon1{
@@ -132,4 +132,43 @@ main {
   position: absolute;
   width: 8.333rem;
   right: 60rem;
+}
+
+.leftdoor{
+  position: absolute;
+  width: 8.333rem;
+  right: 30rem;
+  margin-top: 2rem;
+}
+.rightdoor{
+  position: absolute;
+  width: 8.333rem;
+  left: 30rem;
+  margin-top: 1rem;
+}
+
+.middledoor{
+  position: absolute;
+  width: 8.333rem;
+  left: 23.5rem;
+}
+
+
+.redgem{
+  position: absolute;
+  width: 2rem;
+  height: auto;
+  left: 23.5rem;
+}
+
+.bluegem{
+  position: absolute;
+  width: 2rem;
+  left: 23.5rem;
+}
+
+.knight2{
+  position: absolute;
+  width: 8.333rem;
+  left: 60rem;
 }
