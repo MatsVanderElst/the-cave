@@ -10,7 +10,8 @@ const buildScenario = () => {
   game.addScene(scene); */
 
   scene = new GameScene("caveScene", "you wake up in a misterious dark cave, 'How did i get here?' you ask yourself, When suddenly you hear a growl coming from the shadows...", "growl", "caveBackground");
-  scene.addChoice("get up", "dragonScene", "dragonGrowl1");
+  scene.addChoice("follow sound", "dragonScene", "dragonGrowl1");
+  scene.addAnimation("knightnosword", "expo", 3, -300);
   game.addScene(scene);
 
 
@@ -21,24 +22,30 @@ const buildScenario = () => {
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
   
-  
   scene = new GameScene("fightScene", "You're fighting choose what weapon you want to use, HURRY!!!", "hurry", "caveBackground");
   scene.addChoice("sword", "swordScene", "swordSwing");
-  scene.addChoice("magic", "magicScene", "magicSpell");
+  scene.addChoice("magic", "magicScene", "magic");
   scene.addAnimation("sword1", "expo", 3, 300); 
   scene.addAnimation("wand1", "expo", 3, -300);
+  game.addScene(scene);
+
+  scene = new GameScene("magicScene", "you don't know much about magic, should you really drink this teleportation potion?", "magicdesc", "caveBackground");
+  scene.addChoice("use sword", "swordScene", "swordSwing");
+  scene.addChoice("drink potion", "magicScene", "drink");
+  scene.addAnimation("sword1", "expo", 3, 300); 
+  scene.addAnimation("potion", "expo", 3, -300);
   game.addScene(scene);
   
   
   scene = new GameScene("swordScene", "You pick up the heavy sword from the fallen knight, Quick! use it!", "pickup","caveBackground");
   scene.addChoice("stab", "stabScene", "stab");
-  scene.addChoice("throw", "throwScene", "throw");
+  scene.addChoice("throw", "stabScene", "throw");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);
 
-  scene = new GameScene("stabScene", "your stab wounded the dragon! but what is your next move?", "wounded", "caveBackground");
-  scene.addChoice("stab again", "stabDeath", "stab");
+  scene = new GameScene("stabScene", "your sword wounded the dragon! but what is your next move?", "wounded", "caveBackground");
+  scene.addChoice("stab", "stabDeath", "stab");
   scene.addChoice("run away", "runningScene", "going");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon2", "expo", 3, -300);
@@ -80,7 +87,7 @@ const buildScenario = () => {
   game.addScene(scene);
 
 
-
+  /* throwScene */
 
 }
 

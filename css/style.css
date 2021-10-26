@@ -104,6 +104,12 @@ main {
   right: 60rem;
 }
 
+.knightnosword{
+  position: absolute;
+  width: 8.333rem;
+  left: 60rem;
+}
+
 .deadKnight{
   position: absolute;
   width: 8.333rem;
@@ -132,6 +138,12 @@ main {
   position: absolute;
   width: 8.333rem;
   right: 60rem;
+}
+
+.potion{
+  position: absolute;
+  width: 8.333rem;
+  left: 60rem;
 }
 
 .leftdoor{
