@@ -15,8 +15,8 @@ const buildScenario = () => {
 
 
   scene = new GameScene("dragonScene", "Suddenly a giant fire breathing dragon appears in front of you! what do you do?", "suddenly", "caveBackground");
-  scene.addChoice("fight", "fightScene", "prepare");
-  scene.addChoice("run", "runningScene", "going");
+  scene.addChoice("Fight", "fightScene", "prepare");
+  scene.addChoice("Run", "runningScene", "going");
   scene.addAnimation("knight1", "expo", 3, 300); 
   scene.addAnimation("dragon1", "expo", 3, -300);
   game.addScene(scene);

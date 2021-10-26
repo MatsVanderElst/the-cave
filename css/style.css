@@ -83,6 +83,11 @@ main {
   font-size: 3rem;
   width: 20rem;
   margin: 1rem;
+
+  font-family: brioso-pro-caption,serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 2.5rem;
 }
 
 .knight1{
