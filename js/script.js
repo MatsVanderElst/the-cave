@@ -57,7 +57,7 @@ const buildScenario = () => {
   game.addScene(scene);
 
   scene = new GameScene("runningScene", "You sprint away from the savage beast as you hear it growling away, but which way should you go?", "runafterstab", "splitBackground");
-  scene.addChoice("Light", "doorScene", "going");
+  scene.addChoice("Right", "doorScene", "going");
   scene.addChoice("Left", "leftScene", "herewego");
   game.addScene(scene);
 
