@@ -52,7 +52,7 @@ const buildScenario = () => {
   game.addScene(scene);
   
   scene = new GameScene("stabDeath", "You tried to finish the job but alas... you couldn't...", "stabDeath", "caveBackground");
-  scene.addChoice("Find another way", "caveScene", "going");
+  scene.addChoice("Find another way", "caveScene", "revive");
   scene.addAnimation("deadKnight", "expo", 3, -300);
   game.addScene(scene);
 
@@ -82,7 +82,7 @@ const buildScenario = () => {
   game.addScene(scene);
 
   scene = new GameScene("leftScene", "Finally you see the light at the end of the tunnel, you made is out alive...", "exitdesc", "exitbackground");
-  scene.addChoice("Find another way", "caveScene", "going");
+  scene.addChoice("Find another way", "caveScene", "revive");
   scene.addAnimation("knight2", "expo", 3, -300); 
   game.addScene(scene);
 
